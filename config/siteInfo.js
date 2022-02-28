@@ -1,23 +1,6 @@
-// profile: 头像url
-// github: github url
-// bili: bilibili url
-// cloud: cos或oos
-// beian: ICP备案号和网安备案
 // friends: 友链
 // support: 音声支援榜 
-// translateSupport： 翻译支持
-// sitetheme: 站点主题色（xiaoxi、xiaotao、xiaorou、reine、ailurus）
 exports.site = {
-    title: '',
-    anno: '',
-    author: 'midou',
-    github: '',
-    bili: 'https://space.bilibili.com/9964933',
-    cloud: 'https://xysbtn-1257227807.cos.ap-chengdu.myqcloud.com',
-    beian: {
-        wangan: '',
-        icp: '渝ICP备19003460号'
-    },
     friends:[
         {
             name: '豹按钮 (:3っ)∋',
@@ -100,7 +83,35 @@ exports.site = {
             uid: '404477750',
             name: '阻油Ts喧嚣',
             tag: ''
+        },
+        {
+            uid: '5563350',
+            name: '小希',
+            liveroom: '4138602',
+        },
+        {
+            uid: '5563350',
+            name: '小桃',
+            liveroom: '4138602',
+        },
+        {
+            uid: '1734978373',
+            name: '小柔',
+            liveroom: '22696954',
+        },
+        {
+            uid: '698029620',
+            name: '兰音',
+            liveroom: '22696653',
+        },
+        {
+            uid: '1501380958',
+            name: '艾露露',
+            liveroom: '22746343',
+        },
+        {
+            uid: '9964933',
+            name: '_米豆'
         }
-    ],
-    sitetheme: "xiaoxi"
+    ]
 }
