@@ -90,11 +90,6 @@ exports.site = {
             liveroom: '4138602',
         },
         {
-            uid: '5563350',
-            name: '小桃',
-            liveroom: '4138602',
-        },
-        {
             uid: '1734978373',
             name: '小柔',
             liveroom: '22696954',
