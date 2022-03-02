@@ -5,6 +5,6 @@
   "author": "midou <15500615701@163.com>",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^3.2.0"
+    "node-fetch": "^3.2.1"
   }
 }
