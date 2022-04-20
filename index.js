@@ -55,11 +55,13 @@ const mainFunction = () => {
     site.site.supports.map((v, k) => {
         getProfile(v.uid, k);
     })
+    setTimeout(() => {
+        convert.cwebp('./profile', './webp', {
+            q: 80,
+            quiet: true
+        })
+    }, 5000)
     
-    convert.cwebp('./profile', './webp', {
-        q: 80,
-        quiet: true
-    })
 }
 
 mainFunction();
