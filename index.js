@@ -30,7 +30,7 @@ const getProfile = async (biliId, key) => {
                 getJPG();
                 return;
             }
-            getProfile(site.site.supports[key], key)
+            getProfile(site.site.supports[key].uid, key)
         })
     }).on('error', ()=>{})
 }
@@ -55,17 +55,14 @@ const getJPG = () => {
 }
 
 const mainFunction = () => {
-    // site.site.supports.map((v, k) => {
-    //     getProfile(v.uid, k);
-    // })
-    let key = 0
-    getProfile(site.site.supports[key], key)
+    var key = 0
+    getProfile(site.site.supports[key].uid, key)
     setTimeout(() => {
         convert.cwebp('./profile', './webp', {
             q: 80,
             quiet: true
         })
-    }, 5000)
+    }, 10000)
     
 }
 
