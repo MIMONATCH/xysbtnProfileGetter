@@ -3,9 +3,15 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const http = require('http');
+const convert = require('webp-batch-convert');
+
 
 if(!fs.existsSync(path.resolve(__dirname, './profile'))){
     fs.mkdirSync(path.resolve(__dirname, './profile'));
+}
+
+if(!fs.existsSync(path.resolve(__dirname, './webp'))){
+    fs.mkdirSync(path.resolve(__dirname, './webp'));
 }
 
 var links = [];
@@ -46,6 +52,11 @@ const getJPG = () => {
 const mainFunction = () => {
     site.site.supports.map((v, k) => {
         getProfile(v.uid, k);
+    })
+    
+    convert.cwebp('./profile', './webp', {
+        q: 80,
+        quiet: true
     })
 }
 
