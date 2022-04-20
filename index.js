@@ -24,10 +24,13 @@ const getProfile = async (biliId, key) => {
             links.push({uid: biliId, link: JSON.parse(data.toString()).data.face});
         })
         res.on("end", () => {
-            if(key === site.site.supports.length - 1){
-                console.log("获取了所有的profile data");
+            key += 1
+            if(key === site.site.supports.length){
+                console.log("获取了所有的profile data, links的长度为：", links.length);
                 getJPG();
+                return;
             }
+            getProfile(site.site.supports[key], key)
         })
     }).on('error', ()=>{})
 }
@@ -52,9 +55,11 @@ const getJPG = () => {
 }
 
 const mainFunction = () => {
-    site.site.supports.map((v, k) => {
-        getProfile(v.uid, k);
-    })
+    // site.site.supports.map((v, k) => {
+    //     getProfile(v.uid, k);
+    // })
+    let key = 0
+    getProfile(site.site.supports[key], key)
     setTimeout(() => {
         convert.cwebp('./profile', './webp', {
             q: 80,
