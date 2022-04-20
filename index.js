@@ -8,10 +8,12 @@ const convert = require('webp-batch-convert');
 
 if(!fs.existsSync(path.resolve(__dirname, './profile'))){
     fs.mkdirSync(path.resolve(__dirname, './profile'));
+    console.log("成功创建了profile文件夹");
 }
 
 if(!fs.existsSync(path.resolve(__dirname, './webp'))){
     fs.mkdirSync(path.resolve(__dirname, './webp'));
+    console.log("成功创建了webp文件夹");
 }
 
 var links = [];
