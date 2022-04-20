@@ -62,7 +62,7 @@ const mainFunction = () => {
             q: 80,
             quiet: true
         })
-    }, 10000)
+    }, 30000)
     
 }
 
