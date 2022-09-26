@@ -1,4 +1,4 @@
-name: xysbtn-rss2json
+name: xysbtn-profile-downloader
 
 on:
   push:

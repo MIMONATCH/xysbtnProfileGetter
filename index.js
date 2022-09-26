@@ -63,7 +63,6 @@ const mainFunction = () => {
             quiet: true
         })
     }, 30000)
-    
 }
 
 mainFunction();
