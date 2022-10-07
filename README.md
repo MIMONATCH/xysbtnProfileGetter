@@ -1,5 +1,5 @@
 # xysbtnProfileGetter
- 虚研社按钮头像getter
+虚研社按钮头像Gettet-获取b站对应up的头像并转换为webp格式
 
 ### 所属项目
 
