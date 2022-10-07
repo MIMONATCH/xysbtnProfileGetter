@@ -35,6 +35,7 @@ jobs:
           go build -o ./app
       - name: go run
         run: |
+          cd cmd
           ./app
       - name: SSH Deploy
         uses: easingthemes/ssh-deploy@main
