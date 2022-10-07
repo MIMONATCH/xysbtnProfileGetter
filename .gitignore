@@ -129,3 +129,6 @@ dist
 # profileGetter
 profile/*
 webp
+
+# idea
+.idea

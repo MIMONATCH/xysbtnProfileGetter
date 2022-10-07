@@ -1,0 +1,6 @@
+# 头像下载失败重试次数
+downloadTime: 10
+# 下载头像信息接口
+profileInfoAPI:
+  url: "https://xysbtn.xiaoblogs.cn/userinfo?mid="
+  timeout: 5s

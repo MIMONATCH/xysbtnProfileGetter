@@ -1,27 +1,40 @@
-name: xysbtn-rss2json
+name: xysbtn-profileGetter-go
 
 on:
   push:
     branches:
       - main
   schedule:
-    - cron: "0 */12 * * *"
-  workflow_dispatch:
+    - cron: "* * */7 * *"
+  workflow_dispatch: on
 
 jobs:
-  buildandsubRSS:
+  buildAndRunAndDeploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: setup Node
-        uses: actions/setup-node@v1
+      - name: setup Go
+        uses: actions/setup-go@v3
         with:
-          node-version: 14
-      - name: Install Dependency 
-        run: npm install
-      - name: run index.js
-        run: node index.js
+          go-version: 1.19.1
+      - name: install dependency
+        run: apt install libjpeg-dev libpng-dev libtiff-dev libgif-dev make
+      - name: make webplib
+        run: |
+          wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.4-linux-x86-64.tar.gz
+          tar xvzf libwebp-1.2.4-linux-x86-64.tar.gz
+          cd libwebp-1.2.4-linux-x86-64
+          make
+          make install
+      - name: build
+        run: |
+          go mod tidy
+          cd cmd
+          go build -o ./app
+      - name: go run
+        run: |
+          ./app
       - name: SSH Deploy
         uses: easingthemes/ssh-deploy@main
         env:
@@ -31,5 +44,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: "/node_modules/"
-      
+          EXCLUDE: ""
