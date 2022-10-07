@@ -10,7 +10,7 @@ on:
 
 jobs:
   buildAndRunAndDeploy:
-    runs-on: ubuntu-latest
+    runs-on: macos-12
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,15 +19,7 @@ jobs:
         with:
           go-version: 1.19.1
       - name: install dependency
-        run: sudo apt install libjpeg-dev libpng-dev libtiff-dev libgif-dev make
-      - name: make webplib
-        run: |
-          wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.4.tar.gz
-          tar xvzf libwebp-1.2.4.tar.gz
-          cd libwebp-1.2.4
-          ./configure
-          make
-          sudo make install
+        run: brew install webp
       - name: build
         run: |
           go mod tidy
@@ -37,6 +29,9 @@ jobs:
         run: |
           cd cmd
           ./app
+        env:
+          CGO_CFLAGS: -I/opt/homebrew/include
+          CGO_LDFLAGS: -L/opt/homebrew/lib
       - name: SSH Deploy
         uses: easingthemes/ssh-deploy@main
         env:
