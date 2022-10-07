@@ -25,7 +25,8 @@ jobs:
           wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.4.tar.gz
           tar xvzf libwebp-1.2.4.tar.gz
           cd libwebp-1.2.4
-          sudo make
+          ./configure
+          make
           sudo make install
       - name: build
         run: |
