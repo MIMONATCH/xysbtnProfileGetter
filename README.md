@@ -11,8 +11,12 @@
 - 支持GitHub Action部署
 
 ## 配置
-
-`assets`文件夹下请根据要求的格式填写
+1. 在`Macos`环境变量中添加下面两个变量、或者也仅在本次执行的命令前添加
+```
+  CGO_CFLAGS: -I/opt/homebrew/include
+  CGO_LDFLAGS: -L/opt/homebrew/lib
+```
+2. `assets`文件夹下请根据要求的格式填写
 ```
   supports:
     -
