@@ -14,7 +14,8 @@
 - [webp](https://developers.google.com/speed/webp/download)
 
 ## 配置
-1. 不同环境下的配置
+### 不同环境下的配置  
+
 在`Macos`环境变量中添加下面两个变量、或者也仅在本次执行的命令前添加
 ```shell
   CGO_CFLAGS: -I/opt/homebrew/include
