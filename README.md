@@ -10,14 +10,19 @@
 - 失败重试
 - 支持GitHub Action部署
 
+## 所需依赖
+- [webp](https://developers.google.com/speed/webp/download)
+
 ## 配置
-1. 在`Macos`环境变量中添加下面两个变量、或者也仅在本次执行的命令前添加
-```
+1. 不同环境下的配置
+在`Macos`环境变量中添加下面两个变量、或者也仅在本次执行的命令前添加
+```shell
   CGO_CFLAGS: -I/opt/homebrew/include
   CGO_LDFLAGS: -L/opt/homebrew/lib
 ```
+在`Linux`和`Windows`请参考上面安装依赖的部分
 2. `assets`文件夹下请根据要求的格式填写
-```
+```yaml
   supports:
     -
       uid: '209730937'
