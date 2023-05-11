@@ -28,20 +28,18 @@ func (a *App) Run(ctx context.Context) error {
 		return err
 	}
 
+	a.wg.Add(len(data.Supports))
 	// 下载头像
 	for index, one := range data.Supports {
-		a.wg.Add(1)
 		go func(one pkgdata.Support, index int) {
-			defer func() {
-				a.wg.Done()
-			}()
+			defer a.wg.Done()
 			if err := a.download.ProfileDownload(&one); err != nil {
 				a.failTask <- index
 			}
 		}(one, index)
 	}
-
 	a.wg.Wait()
+
 	// 下载失败的头像重试
 	if len(a.failTask) == 0 {
 		return nil

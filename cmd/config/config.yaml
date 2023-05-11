@@ -2,5 +2,5 @@
 downloadTime: 10
 # 下载头像信息接口
 profileInfoAPI:
-  url: "https://xysbtn.xiaoblogs.cn/userinfo?mid="
+  url: "http://api.bilibili.com/x/space/acc/info?mid="
   timeout: 5s

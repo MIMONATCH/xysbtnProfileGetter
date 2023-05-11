@@ -3,9 +3,10 @@ package biz
 import (
 	"fmt"
 	"io"
+	"os"
+	"regexp"
 
 	"github.com/pkg/errors"
-	gojsonq "github.com/thedevsaddam/gojsonq/v2"
 
 	"github.com/MIMONATCH/xysbtnProfileGetter/internal/config"
 	"github.com/MIMONATCH/xysbtnProfileGetter/internal/pkg/data"
@@ -26,22 +27,37 @@ func NewDownload(config *config.ProfileConfig, compress *Compress, profile *Prof
 }
 
 func (d *Download) ProfileDownload(support *data.Support) error {
-	resp, err := d.profile.Check(fmt.Sprint(d.config.ProfileInfoAPI.Url, support.Uid))
+	resp, err := d.profile.Check(fmt.Sprint(d.config.ProfileInfoAPI.Url, support.Uid), support.Uid)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
 
-	// 从返回的json中解析出头像url
-	upData, err := io.ReadAll(resp.Body)
+	if resp.Body == nil {
+		return nil
+	}
+
+	outFile, err := os.Create(fmt.Sprint(support.Uid))
+	defer outFile.Close()
+	_, err = io.Copy(outFile, resp.Body)
 	if err != nil {
 		return errors.Wrap(err, "read response body error")
 	}
+	content, err := os.ReadFile(fmt.Sprint(support.Uid))
+	if err != nil {
+		return errors.Wrap(err, "read file error")
+	}
 
-	face := gojsonq.New().FromString(string(upData)).Find("data.face")
+	compileRegex := regexp.MustCompile("\"face\":\"(.*?)\",")
+	face := compileRegex.FindStringSubmatch(string(content))
+
+	fmt.Println(face)
+	if len(face) == 0 {
+		return nil
+	}
 
 	// 检查 profile url是否可达
-	profileResp, err := d.profile.Check(face.(string))
+	profileResp, err := d.profile.Check(face[1], support.Uid)
 	if err != nil {
 		return err
 	}
