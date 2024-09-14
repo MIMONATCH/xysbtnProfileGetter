@@ -27,7 +27,11 @@ func NewDownload(config *config.ProfileConfig, compress *Compress, profile *Prof
 }
 
 func (d *Download) ProfileDownload(support *data.Support) error {
-	resp, err := d.profile.Check(fmt.Sprint(d.config.ProfileInfoAPI.Url, support.Uid), support.Uid)
+	profileUrl, err := SignAndGenerateURL(fmt.Sprint(d.config.ProfileInfoAPI.Url, support.Uid))
+	if err != nil {
+		return err
+	}
+	resp, err := d.profile.Check(profileUrl)
 	if err != nil {
 		return err
 	}
