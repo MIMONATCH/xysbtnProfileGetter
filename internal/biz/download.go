@@ -61,7 +61,7 @@ func (d *Download) ProfileDownload(support *data.Support) error {
 	}
 
 	// 检查 profile url是否可达
-	profileResp, err := d.profile.Check(face[1], support.Uid)
+	profileResp, err := d.profile.Check(face[1])
 	if err != nil {
 		return err
 	}
