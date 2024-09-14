@@ -41,8 +41,6 @@ func (d *Download) ProfileDownload(support *data.Support) error {
 		return nil
 	}
 
-	fmt.Print(resp.Body)
-
 	outFile, err := os.Create(fmt.Sprint(support.Uid))
 	defer outFile.Close()
 	_, err = io.Copy(outFile, resp.Body)
@@ -53,6 +51,9 @@ func (d *Download) ProfileDownload(support *data.Support) error {
 	if err != nil {
 		return errors.Wrap(err, "read file error")
 	}
+
+	body, err := io.ReadAll(resp.Body)
+	fmt.Print(string(body))
 
 	compileRegex := regexp.MustCompile("\"face\":\"(.*?)\",")
 	face := compileRegex.FindStringSubmatch(string(content))
