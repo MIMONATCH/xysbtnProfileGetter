@@ -41,6 +41,8 @@ func (d *Download) ProfileDownload(support *data.Support) error {
 		return nil
 	}
 
+	fmt.Print(resp.Body)
+
 	outFile, err := os.Create(fmt.Sprint(support.Uid))
 	defer outFile.Close()
 	_, err = io.Copy(outFile, resp.Body)
@@ -66,6 +68,8 @@ func (d *Download) ProfileDownload(support *data.Support) error {
 		return err
 	}
 	defer profileResp.Body.Close()
+
+	fmt.Print(resp.Body)
 
 	if err := d.compress.ProfileCompress(profileResp.Body, support.Uid); err != nil {
 		return err
